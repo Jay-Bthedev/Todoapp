@@ -34,3 +34,24 @@ flex-direction: column;
 }
 }
     
+button {
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+/* The "Add Task" Button */
+.create-task-form button {
+  background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 100%); /* Violet Gradient */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3); /* Glow effect */
+}
+
+.create-task-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(139, 92, 246, 0.5);
+}

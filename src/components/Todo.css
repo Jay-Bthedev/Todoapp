@@ -1,95 +1,132 @@
-.Todo{
+/* 1. Main Card Styling */
+.Todo {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #2C2C2C;
-    color: white;
-    padding: 0.5rem 1rem;
-    transition: all 0.5s ease;
-    border-radius: 4px;
     
-
+    /* Dark Slate Background */
+    background-color: #1e293b; 
+    color: #e2e8f0;
+    
+    padding: 1rem 1.5rem;
+    margin-bottom: 1rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    
+    /* SAFE MODE: No 'transform' or 'z-index' here ensures no Modal conflicts */
+    transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
-.Todo:hover{
-    background-color: #3A3A3A;
+/* Hover: Lighten the background slightly */
+.Todo:hover {
+    background-color: #263345;
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
-.Todo .todo-button-flex{
+/* 2. Task Text */
+.Todo .task {
+    width: 35%;
+    font-weight: 500;
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow: ellipsis;
+    font-size: 1rem;
+}
+
+/* 3. Time Display */
+.Todo .scheduleTime {
+    width: 15%;
+    color: #94a3b8; /* Muted grey */
+    font-size: 0.9rem;
+    text-align: center; /* Centers the time */
+}
+
+/* 4. Status Badge */
+.Todo .status {
+    width: 20%; /* Fixed width ensures alignment */
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 20px;
+    text-align: center;
+    
+    /* Prevents the badge from shrinking */
+    flex-shrink: 0; 
+}
+
+/* 5. Buttons Container */
+.Todo .todo-button-flex {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    justify-content: end;
+    gap: 10px;
+    justify-content: flex-end;
     width: 30%;
-     overflow: hidden;
 }
-.Todo button{
-    background: none;
-    border: 1px solid white;
-    color: white;
+
+/* Base Button Style */
+.Todo button {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #cbd5e1;
     cursor: pointer;
-    transition: all 0.5s ease;
     border-radius: 8px;
-     padding: 0.5rem 1rem;
-}
-.Todo button:hover{
-    background-color: white;
-    color: black;
-}
-.Todo select{
-    background-color:transparent ;
-    border: 1px solid white;
-    border-radius: 8px;
-    color: white;
-    padding: 0.5rem 1rem;
-
-}
-.Todo select option{
-    background-color: rgb(20, 20, 20);
-    color: white;
-    padding-right: 1rem;
-}
-.Todo .task{
-    width: 30%;
-    overflow: hidden;
-}
-.Todo .scheduleTime{
-    width: 10%;
-    overflow: hidden;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.2s ease;
 }
 
-.Todo .status{
-    width: 20%;
-    overflow: hidden;
-    
-    
+/* EDIT Button Hover -> Blue */
+.Todo button:first-child:hover {
+    background: rgba(59, 130, 246, 0.1); /* Light Blue BG */
+    border-color: #3b82f6;
+    color: #60a5fa;
 }
-@media screen and (max-width: 500px){
-    .Todo{
-        display: flex;
+
+/* DELETE Button Hover -> Red */
+.Todo button:last-child:hover {
+    background: rgba(239, 68, 68, 0.1); /* Light Red BG */
+    border-color: #ef4444;
+    color: #f87171;
+}
+
+/* 6. Mobile Responsiveness */
+@media screen and (max-width: 600px) {
+    .Todo {
         flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 5px;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 1.2rem;
     }
-.Todo .task{
-width: 100%;
-}
-.Todo .scheduleTime{
-width: 100%;
-}
-.Todo .status{
-width: 100%;
-}
-.Todo button{
-width: 100%;
-padding: 0;
 
-}
-.Todo .todo-button-flex{
-display: flex;
-flex-direction: column;
-}
-
-}
+    .Todo .task {
+        width: 100%;
+        font-size: 1.1rem;
+        margin-bottom: 4px;
+    }
     
+    /* Move status below title */
+    .Todo .status {
+        width: auto; /* Allow it to fit content on mobile */
+        padding: 4px 12px;
+        margin-bottom: 8px;
+        text-align: left;
+    }
+
+    .Todo .scheduleTime {
+        width: 100%;
+        text-align: left;
+        margin-bottom: 12px;
+        font-size: 0.85rem;
+    }
+
+    .Todo .todo-button-flex {
+        width: 100%;
+        justify-content: space-between; 
+    }
+
+    .Todo button {
+        flex: 1; 
+        text-align: center;
+    }
+}

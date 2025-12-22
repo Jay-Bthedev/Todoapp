@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
 import HomePage from './pages/HomePage'
+import {Toaster} from 'react-hot-toast' 
 
 function App() {
   const [count, setCount] = useState(0)

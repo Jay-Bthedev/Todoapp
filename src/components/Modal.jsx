@@ -1,92 +1,69 @@
 import React, { useState } from 'react'
+import ReactDOM from 'react-dom' 
 import "./Modal.css"
 
 const Modal = (props) => {
-
-   
-
     
-
-    const [modalTaskData, setModalTaskData] = useState(props.modalData);
     
-    const saveChangesClicked = () => {
-       
-        props.propsEditTodosArrayFunction(modalTaskData);
-        console.log("Edited task data sent from Modal:", modalTaskData);
-         props.propsCloseModal();
+    const [editedTodo, setEditedTodo] = useState(props.modalData);
+
+    const handleEditChange = (e) => {
+        const { name, value } = e.target;
+        setEditedTodo({
+            ...editedTodo,
+            [name]: value
+        })
     }
 
-
+    const handleSave = (e) => {
+        e.preventDefault();
+        props.propsEditTodosArrayFunction(editedTodo);
+        props.propsCloseModal();
+    }
 
     
+    return ReactDOM.createPortal(
+        <div className='Modal' onClick={props.propsCloseModal}>
+            <div 
+                className='task-card' 
+                onClick={(e) => e.stopPropagation()} 
+            >
+                <h3>Edit Task</h3>
 
+                <form onSubmit={handleSave}>
+                    <label>Task Name</label>
+                    <input 
+                        type='text'
+                        name="task" 
+                        value={editedTodo.task} 
+                        onChange={handleEditChange} 
+                    />
 
+                    <label>Status</label>
+                    <select 
+                        name="status" 
+                        value={editedTodo.status} 
+                        onChange={handleEditChange}
+                    >
+                        <option value="Pending">Pending</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Completed">Completed</option>
+                    </select>
 
-console.log("Current Time Value:", modalTaskData.scheduleTime);
-  return (
-      <div className='Modal'>
-          
-          
-          
+                    <label>Time</label>
+                    <input 
+                        type="time" 
+                        name="scheduleTime" 
+                        value={editedTodo.scheduleTime} 
+                        onChange={handleEditChange} 
+                    />
 
-
-          <div className='task-card'>
-              
-              <h3>Edit your task</h3>
-
-              <form>
-                  <label>Task</label>
-                  <input
-                      value={modalTaskData.task}
-                      onChange={(e) => {
-                          
-                          setModalTaskData({...modalTaskData, task: e.target.value})
-                          
-                      }}
-                      type="text" placeholder='Edit your task here' />
-                  <label>Schedule Time</label>
-                  <input 
-                  value={modalTaskData.scheduleTime || ""}
-                   onChange={(e) => {
-                          
-                          setModalTaskData({...modalTaskData, scheduleTime: e.target.value})
-                          
-                      }}
-
-                   type="time" />
-
-
-
-
-                 
-                  
-                  <label>Status</label>
-
-                  <select
-                      value={modalTaskData.status} 
-                      onChange={(e) => {
-                          
-                          setModalTaskData({...modalTaskData, status: e.target.value})
-                          
-                      }}
-                      
-                  
-                  >
-                  <option value="Pending">Pending</option>
-                  <option value="In Progress">In Progress</option>
-                    <option value="Completed">Completed</option>
-              </select>
-              <button onClick={saveChangesClicked} type='button'>Save Changes</button>
-          </form>
-              
-          </div>
-          
- 
-
-
-
-     </div>
-  )
+                    <button type="submit">Save Changes</button>
+                </form>
+            </div>
+        </div>,
+        document.body 
+    );
 }
 
 export default Modal

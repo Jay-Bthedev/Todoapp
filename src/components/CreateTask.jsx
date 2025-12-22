@@ -1,13 +1,21 @@
 import React, { useState } from "react";
 import "./CreateTask.css";
 
-const CreateTask = (props ) => {
+import toast from 'react-hot-toast';
+
+const CreateTask = (props) => {
   const [newTask, setNewTask] = useState("");
-  const [newTime, setNewTime] = useState(null);
+  
+  const [newTime, setNewTime] = useState("");
 
   const formSubmit = (e) => {
-    //important for every submit function
     e.preventDefault();
+
+    
+    if (!newTask || !newTime) {
+        toast.error("Please fill in both the task and the time!");
+        return;
+    }
 
     console.log("New Task Created:", newTask);
 
@@ -15,11 +23,10 @@ const CreateTask = (props ) => {
       id: Date.now(),
       task: newTask,
       status: "Pending",
-      scheduleTime: `${newTime} Am`,
+      
+      scheduleTime: newTime, 
     });
-     
-
-
+      
     setNewTask("");
     setNewTime("");
   };
@@ -36,7 +43,6 @@ const CreateTask = (props ) => {
          type="time"
         value={newTime}
         onChange={(e)=>setNewTime(e.target.value)}
-      
       />
 
       <button type="submit">Add Task</button>
