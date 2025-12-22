@@ -1,0 +1,36 @@
+.create-task-form{
+    display: flex;
+    gap: 1rem;
+    
+}
+.create-task-form button{
+    background: rgb(218, 216, 216);
+    border: 1px solid white;
+    color: rgb(20, 20, 20);
+    cursor: pointer;
+    transition: all 0.5s ease;
+    border-radius: 8px;
+     padding: 0.5rem 1rem;
+}
+.create-task-form button:hover{
+    background-color: white;
+    color: black;
+}
+
+.create-task-form input{
+   background-color:transparent ;
+    border: 1px solid white;
+    border-radius: 8px;
+    color: white;
+    padding: 0.5rem 1rem;
+    flex-grow: 1;
+
+}
+
+@media screen and (max-width: 450px){
+.create-task-form{
+    display: flex;
+flex-direction: column;
+}
+}
+    
