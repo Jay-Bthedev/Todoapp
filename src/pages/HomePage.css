@@ -15,6 +15,15 @@
 
 .homepage .notodo{
     display: flex;
+    flex-direction: column-reverse;
     margin-top: 50px;
     justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.todoimg{
+    width: 300px;
+    opacity: 0.9;
+    margin-bottom: 20px;
 }

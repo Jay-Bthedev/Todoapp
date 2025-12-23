@@ -43,6 +43,7 @@ const CreateTask = (props) => {
          type="time"
         value={newTime}
         onChange={(e)=>setNewTime(e.target.value)}
+        placeholder="Input time"
       />
 
       <button type="submit">Add Task</button>

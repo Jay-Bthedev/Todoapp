@@ -3,17 +3,17 @@ import "./HomePage.css"
 import NavComponent from '../components/NavComponent'
 import CreateTask from '../components/CreateTask'
 import Todo from '../components/Todo'
+// 1. IMPORT THE IMAGE
+import emptyImage from '../assets/void.svg';
 import toast, { Toaster } from 'react-hot-toast';
 
 const HomePage = () => {
 
-    
     const [todosArray, setTodosArray] = useState(() => {
         const savedTodos = localStorage.getItem("myTodos");
         return savedTodos ? JSON.parse(savedTodos) : [];
     });
 
-    
     useEffect(() => {
         localStorage.setItem("myTodos", JSON.stringify(todosArray));
     }, [todosArray]);
@@ -39,7 +39,6 @@ const HomePage = () => {
         toast.success("Task updated!");
     }
 
-  
     const deleteTodoFunction = (todoToDelete) => {
         toast((t) => (
             <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px'}}>
@@ -47,11 +46,9 @@ const HomePage = () => {
                 <div>
                     <button 
                         onClick={() => {
-                           
                             const newTodo = todosArray.filter((todo) => todo.id !== todoToDelete.id);
                             setTodosArray(newTodo);
                             
-                           
                             toast.dismiss(t.id);
                             toast.error("Task deleted");
                         }}
@@ -76,7 +73,6 @@ const HomePage = () => {
         ), { duration: 5000, position: 'top-center' });
     }
 
-   
     const resetTodoFunction = () => {
         if (todosArray.length === 0) return; 
 
@@ -86,10 +82,7 @@ const HomePage = () => {
                 <div>
                     <button 
                         onClick={() => {
-                            
                             setTodosArray([]);
-                            
-                            // Close Confirm Toast & Show Success
                             toast.dismiss(t.id);
                             toast.error("All tasks cleared");
                         }}
@@ -116,7 +109,6 @@ const HomePage = () => {
 
   return (
       <div className='homepage'>
-          {/* TOASTER COMPONENT  */}
           <Toaster position="top-center" reverseOrder={false} />
 
           <NavComponent propsResetFunction={resetTodoFunction} />
@@ -137,8 +129,14 @@ const HomePage = () => {
                       ))}
                   </div>
               ) : (
+                 
                   <div className='notodo'>
-                      No to do available
+                      <img 
+                          src={emptyImage} 
+                          alt="No tasks" 
+                          className='todoimg'
+                      />
+                      <p>No tasks yet. Time to relax!</p>
                   </div>
               )}
           </main>
