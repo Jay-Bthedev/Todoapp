@@ -5,8 +5,6 @@ import CreateTask from '../components/CreateTask'
 import Todo from '../components/Todo'
 import emptyImage from '../assets/void.svg';
 import toast, { Toaster } from 'react-hot-toast';
-
-// FIREBASE IMPORTS
 import { db, auth } from '../firebase';
 import { 
   collection, addDoc, deleteDoc, doc, updateDoc, onSnapshot, query, where 

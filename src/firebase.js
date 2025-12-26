@@ -2,7 +2,11 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
+// DEBUG: Check if keys are loading
+console.log("API Key:", import.meta.env.VITE_FIREBASE_API_KEY);
+
 const firebaseConfig = {
+  // MUST use import.meta.env
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
   projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
