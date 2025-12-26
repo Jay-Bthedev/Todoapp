@@ -1,20 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
-import { Route, Routes } from 'react-router-dom'
-import HomePage from './pages/HomePage'
-import {Toaster} from 'react-hot-toast' 
+import React, { useEffect, useState } from 'react';
+import HomePage from './pages/HomePage';
+import LoginPage from './pages/LoginPage';
+import { auth } from './firebase';
+import { onAuthStateChanged } from 'firebase/auth';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Listen to login state changes
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setLoading(false);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  if (loading) return <div style={{color:'white', textAlign:'center', marginTop:'20%'}}>Loading...</div>;
 
   return (
-    <Routes>
-      <Route path='/' element={ <HomePage/>}/>
-    </Routes>
-    
-  )
+    <div className="App">
+      {user ? <HomePage /> : <LoginPage />}
+    </div>
+  );
 }
 
-export default App
-         
+export default App;
